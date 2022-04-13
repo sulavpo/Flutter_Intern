@@ -4,14 +4,14 @@ import 'package:flutter/painting.dart';
 
 
 
-class landing_screen extends StatefulWidget {
-  const landing_screen({Key? key}) : super(key: key);
+class LandingScreen extends StatefulWidget {
+  const LandingScreen({Key? key}) : super(key: key);
 
   @override
-  State<landing_screen> createState() => _landing_screenState();
+  State<LandingScreen> createState() => _LandingScreenState();
 }
 
-class _landing_screenState extends State<landing_screen> {
+class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -34,8 +34,8 @@ class _landing_screenState extends State<landing_screen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: [Expanded(child: Text("Hi Morning'n Cameron!",style: textTheme.headline5!.apply(
-                              color: Colors.white,fontSizeDelta: 2,
+                            children: [Expanded(child: Text("Hi\nMorning'n Cameron!",style: textTheme.headline5!.apply(
+                              color: Colors.white,
                             )),),
                               Container(
                                 width: 140,

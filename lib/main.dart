@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: 'simplePage',
-      routes: {'simplePage': (context)=>landing_screen()},
+      routes: {'simplePage': (context)=>LandingScreen()},
     );
   }
 }
