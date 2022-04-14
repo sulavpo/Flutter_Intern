@@ -59,7 +59,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         Expanded(
                             flex:1,
                             child: Container(decoration: BoxDecoration(
-                                //color: Colors.red
+                                color: Colors.red
                             ),
                             )
                         )
