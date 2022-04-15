@@ -243,7 +243,7 @@ class _LandingScreenState extends State<LandingScreen> {
       borderRadius: BorderRadius.circular(20),
       child: Image(
         fit: BoxFit.fill,
-        image: AssetImage('lib/img/avatar.png'),
+        image: AssetImage('lib/img/living.png'),
       ),
     ),
 
@@ -260,7 +260,7 @@ class _LandingScreenState extends State<LandingScreen> {
       borderRadius: BorderRadius.circular(20),
       child: Image(
         fit: BoxFit.fill,
-        image: AssetImage('lib/img/avatar.png'),
+        image: AssetImage('lib/img/kitchen.png'),
       ),
     ),
 
@@ -277,7 +277,7 @@ class _LandingScreenState extends State<LandingScreen> {
       borderRadius: BorderRadius.circular(20),
       child: Image(
         fit: BoxFit.fill,
-        image: AssetImage('lib/img/avatar.png'),
+        image: AssetImage('lib/img/hall.png'),
       ),
     ),
     decoration: BoxDecoration(
@@ -293,7 +293,7 @@ class _LandingScreenState extends State<LandingScreen> {
       borderRadius: BorderRadius.circular(20),
       child: Image(
         fit: BoxFit.fill,
-        image: AssetImage('lib/img/avatar.png'),
+        image: AssetImage('lib/img/game.png'),
       ),
     ),
 
@@ -310,7 +310,7 @@ class _LandingScreenState extends State<LandingScreen> {
       borderRadius: BorderRadius.circular(20),
       child: Image(
         fit: BoxFit.fill,
-        image: AssetImage('lib/img/avatar.png'),
+        image: AssetImage('lib/img/bedroom.png'),
       ),
     ),
 
