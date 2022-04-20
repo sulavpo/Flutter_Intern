@@ -252,7 +252,7 @@ class _LandingScreenState extends State<LandingScreen> {
         children: [
           Expanded(
               flex:1,
-              child: Text("Living\t\t\t\t\t\t\t\t\t\t\t\t\t1/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
+              child: Text("Living\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t1/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
           Expanded(
             flex: 2,
             child: ListView(
