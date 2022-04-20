@@ -1,7 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 
@@ -16,8 +13,6 @@ class _LandingScreenState extends State<LandingScreen> {
   int myIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.blueGrey[700],
       body: Stack(
@@ -35,7 +30,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         Expanded(
                             flex:1,
                             child: Container(
-                              child: Row(
+                              child:Row(
                                 children: [
                                   Expanded(
                                       flex:3,
@@ -116,10 +111,9 @@ class _LandingScreenState extends State<LandingScreen> {
                         SizedBox(width: 12),
                       ],
                     ),
-
                     decoration: BoxDecoration(
                         color: Colors.blueGrey[900],
-                      borderRadius: BorderRadius.only(
+                      borderRadius:const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
                       )
@@ -133,8 +127,8 @@ class _LandingScreenState extends State<LandingScreen> {
       ),
       bottomNavigationBar: Container(
         color: Colors.blueGrey[900],
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 20),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.0,vertical: 20),
           child: GNav(
             backgroundColor: Color(0xFF263238),
             color: Colors.grey,
@@ -142,7 +136,7 @@ class _LandingScreenState extends State<LandingScreen> {
             tabBackgroundColor: Color(0xFF8E24AA),
             gap: 8,
             padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-            tabs: const [
+            tabs: [
               GButton(icon: Icons.home,text: 'Home',),
               GButton(icon: Icons.add,text: 'New',),
               GButton(icon: Icons.cloud,text: 'Cloud',),
@@ -167,7 +161,7 @@ class _LandingScreenState extends State<LandingScreen> {
     child: Column(
       children: [
         Icon(Icons.sunny,color: Colors.yellow,size: 50,),
-        //Text("Morning'",style: TextStyle(fontSize: 5,color: Colors.white,))
+        Text("Morning'",style: TextStyle(fontSize: 5,color: Colors.white))
       ],
     ),
     );
@@ -239,84 +233,359 @@ class _LandingScreenState extends State<LandingScreen> {
     margin: EdgeInsets.fromLTRB(40, 45, 0, 60),
     width: 200,
     //height: 70,
-    child:ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image(
-        fit: BoxFit.fill,
-        image: AssetImage('lib/img/living.png'),
-      ),
-    ),
 
     decoration: BoxDecoration(
+      image: DecorationImage(image: Image.asset("lib/img/living.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
+    ),
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0, 225, 0, 0),
+      width: 20,
+      //height: 20,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),),
+        color: Colors.grey.withOpacity(0.6),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+              flex:1,
+              child: Text("Living\t\t\t\t\t\t\t\t\t\t\t\t\t1/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+
+
+              ],
+            ),)],
+      ),
     ),
   );
   buildVard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 70,
-    child:ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image(
-        fit: BoxFit.fill,
-        image: AssetImage('lib/img/kitchen.png'),
-      ),
-    ),
 
     decoration: BoxDecoration(
+      image: DecorationImage(image: Image.asset("lib/img/kitchen.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
+    ),
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0, 225, 0, 0),
+      width: 20,
+      //height: 20,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),),
+        color: Colors.grey.withOpacity(0.6),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+              flex:1,
+              child: Text("Kitchen\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+
+
+              ],
+            ),)],
+      ),
     ),
   );
   buildNard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 70,
-    child:ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image(
-        fit: BoxFit.fill,
-        image: AssetImage('lib/img/hall.png'),
-      ),
-    ),
+
     decoration: BoxDecoration(
+      image: DecorationImage(image: Image.asset("lib/img/hall.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
+    ),
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0, 225, 0, 0),
+      width: 20,
+      //height: 20,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),),
+        color: Colors.grey.withOpacity(0.6),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+              flex:1,
+              child: Text("Hall\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t3/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+
+
+              ],
+            ),)],
+      ),
     ),
   );
   buildMard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 70,
-    child:ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image(
-        fit: BoxFit.fill,
-        image: AssetImage('lib/img/game.png'),
-      ),
-    ),
-
     decoration: BoxDecoration(
+      image: DecorationImage(image: Image.asset("lib/img/game.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
+    ),
+
+
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0, 225, 0, 0),
+      width: 20,
+      //height: 20,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),),
+        color: Colors.grey.withOpacity(0.6),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+              flex:1,
+              child: Text("Game\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t4/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+                  width: 40,
+                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white,width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),),
+
+
+              ],
+            ),)],
+      ),
     ),
   );
   buildQard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 20,
-    child:ClipRRect(
+    decoration: BoxDecoration(
+      image: DecorationImage(image: Image.asset("lib/img/bedroom.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
-      child: Image(
-        fit: BoxFit.fill,
-        image: AssetImage('lib/img/bedroom.png'),
+      //color: Colors.white,
+    ),
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0, 225, 0, 0),
+      width: 20,
+      //height: 20,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),
+        bottomRight: Radius.circular(20),),
+        color: Colors.grey.withOpacity(0.6),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+              flex:1,
+      child: Text("Bedroom\t\t\t\t\t\t\t\t\t\t\t5/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
+        Expanded(
+          flex: 2,
+          child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+              width: 40,
+              child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
+              border: Border.all(color: Colors.white,width: 2),
+              borderRadius: BorderRadius.circular(50),
+            ),),
+            Container(
+              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+              width: 40,
+              child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
+              border: Border.all(color: Colors.white,width: 2),
+              borderRadius: BorderRadius.circular(50),
+            ),),
+            Container(
+              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+              width: 40,
+              child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
+              border: Border.all(color: Colors.white,width: 2),
+              borderRadius: BorderRadius.circular(50),
+            ),),
+            Container(
+              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+              width: 40,
+              child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
+              border: Border.all(color: Colors.white,width: 2),
+              borderRadius: BorderRadius.circular(50),
+            ),),
+            Container(
+              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
+              width: 40,
+              child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
+              border: Border.all(color: Colors.white,width: 2),
+              borderRadius: BorderRadius.circular(50),
+            ),),
+
+
+          ],
+        ),)],
       ),
     ),
-
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.white,
-    ),
   );
+
+
+
+
   }
