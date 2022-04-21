@@ -99,22 +99,22 @@ class _LandingScreenState extends State<LandingScreen> {
                                       scrollDirection: Axis.horizontal,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+                                          padding: const EdgeInsets.fromLTRB(15, 5, 0, 10),
                                           child: Text("Morning'",style: TextStyle(color: Colors.white),)),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(30, 10, 15, 10),
+                                          padding: const EdgeInsets.fromLTRB(30, 5, 15, 10),
                                           child: Text("Night",style: TextStyle(color: Colors.white),),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(27, 10, 15, 10),
+                                          padding: const EdgeInsets.fromLTRB(27, 5, 15, 10),
                                           child: Text("Music",style: TextStyle(color: Colors.white),),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(27, 10,15, 10),
+                                          padding: const EdgeInsets.fromLTRB(27, 5,15, 10),
                                           child: Text("Movie",style: TextStyle(color: Colors.white),),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(27, 10, 15, 10),
+                                          padding: const EdgeInsets.fromLTRB(27, 5, 15, 10),
                                           child: Text("Leave",style: TextStyle(color: Colors.white),),
                                         ),
                                       ],
@@ -187,7 +187,7 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
  Widget _buildCard() => Container(
-    margin: EdgeInsets.all(5),
+   margin: EdgeInsets.all(5),
       width: 70,
       height: 70,
 
