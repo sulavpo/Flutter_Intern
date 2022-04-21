@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 
@@ -10,7 +11,6 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  int myIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,21 +37,27 @@ class _LandingScreenState extends State<LandingScreen> {
                                       child: Container(decoration: BoxDecoration(
                                         //color: Colors.red
                                       ),
-                                        child: Text("\nHi\nMorning'n Cameron!",style: TextStyle(fontSize: 23,color: Colors.white),),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text("\nHi\nMorning'n Cameron!",style: TextStyle(fontSize: 23,color: Colors.white),),
+                                        ),
                                       )
                                   ),
                                   Expanded(
                                       flex:1,
-                                      child: SizedBox(
-                                        width: 70,
-                                        height: 70,
-                                        child:ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(20),
-                                          ),
-                                          child: Image(
-                                            fit: BoxFit.fill,
-                                            image: AssetImage('lib/img/avatar.png'),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SizedBox(
+                                          width: 70,
+                                          height: 70,
+                                          child:ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(20),
+                                            ),
+                                            child: Image(
+                                              fit: BoxFit.fill,
+                                              image: AssetImage('asset/img/avatar.png'),
+                                            ),
                                           ),
                                         ),
                                       )
@@ -64,28 +70,60 @@ class _LandingScreenState extends State<LandingScreen> {
                             )
                         ),
                         Expanded(
-                            flex:1,
-                            child: Container(
-                              height:50,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  buildCard(),
-                                  SizedBox(width: 12),
-                                 // Positioned(child: Text("Hello"),),
-                                  buildTard(),
-                                  SizedBox(width: 12),
-                                  buildWard(),
-                                  SizedBox(width: 12),
-                                  buildXard(),
-                                  SizedBox(width: 12),
-                                  buildZard(),
-                                  SizedBox(width: 12),
+                          flex: 1,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [Column(
+                                children: [Expanded(
+                                  flex: 2,
+                                    child: Container(
+                                      width:400,
+                                        height: 50,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        _buildCard(),
+                                        _buildTard(),
+                                        _buildWard(),
+                                        _buildXard(),
+                                        _buildZard()
+                                      ],
+                                    ),
+                                    )
+                                ),Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    width: 400,
+                                    height: 50,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+                                          child: Text("Morning'",style: TextStyle(color: Colors.white),)),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(30, 10, 15, 10),
+                                          child: Text("Night",style: TextStyle(color: Colors.white),),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(27, 10, 15, 10),
+                                          child: Text("Music",style: TextStyle(color: Colors.white),),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(27, 10,15, 10),
+                                          child: Text("Movie",style: TextStyle(color: Colors.white),),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(27, 10, 15, 10),
+                                          child: Text("Leave",style: TextStyle(color: Colors.white),),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
                                 ],
-                              ),
-                              decoration: BoxDecoration(
-                                //color: Colors.red
-                            ),
+                                ),
+  ]
                             )
                         )
                       ],
@@ -98,16 +136,15 @@ class _LandingScreenState extends State<LandingScreen> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        buildDard(),
+                        _buildDard(),
                         SizedBox(width: 12),
-                        // Positioned(child: Text("Hello"),),
-                        buildVard(),
+                        _buildVard(),
                         SizedBox(width: 12),
-                        buildNard(),
+                        _buildNard(),
                         SizedBox(width: 12),
-                        buildMard(),
+                        _buildMard(),
                         SizedBox(width: 12),
-                        buildQard(),
+                        _buildQard(),
                         SizedBox(width: 12),
                       ],
                     ),
@@ -149,93 +186,68 @@ class _LandingScreenState extends State<LandingScreen> {
     );
   }
 
-  buildCard() => Container(
-    margin: EdgeInsets.fromLTRB(9, 10, 0, 35),
-      width: 61,
-      height: 0,
+ Widget _buildCard() => Container(
+    margin: EdgeInsets.all(5),
+      width: 70,
+      height: 70,
 
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
+      shape: BoxShape.circle,
       color: Colors.blueGrey[900],
     ),
-    child: Column(
-      children: [
-        Icon(Icons.sunny,color: Colors.yellow,size: 50,),
-        Text("Morning'",style: TextStyle(fontSize: 5,color: Colors.white))
-      ],
-    ),
+    child: Icon(Icons.sunny,color: Colors.yellow,size: 40,),
     );
-  buildTard() => Container(
-    margin: EdgeInsets.fromLTRB(4, 10, 0, 35),
-    width: 61,
-    height: 0,
+ Widget _buildTard() => Container(
+    margin: EdgeInsets.all(5),
+    width: 70,
+    height: 70,
 
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(40),
+      shape: BoxShape.circle,
       color: Colors.blueGrey[900],
     ),
-    child: Column(
-      children: [
-        Icon(Icons.shield_moon_rounded,color: Colors.yellow,size: 50,),
-        //Text("Night'",style: TextStyle(fontSize: 5,color: Colors.white,))
-      ],
-    ),
+    child: Icon(Icons.shield_moon_rounded,color: Colors.yellow,size: 40,),
   );
-  buildWard() => Container(
-    margin: EdgeInsets.fromLTRB(4, 10, 0, 35),
-    width: 61,
-    height: 0,
+  Widget _buildWard() => Container(
+    margin: EdgeInsets.all(5),
+    width: 70,
+    height: 70,
 
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(40),
+      shape: BoxShape.circle,
       color: Colors.blueGrey[900],
     ),
-    child: Column(
-      children: [
-        Icon(Icons.music_note,color: Colors.red,size: 50,),
-        //Text("Music",style: TextStyle(fontSize: 5,color: Colors.white,))
-      ],
-    ),
+    child: Icon(Icons.music_note,color: Colors.red,size: 40,),
   );
-  buildXard() => Container(
-    margin: EdgeInsets.fromLTRB(4, 10, 0, 35),
-    width: 61,
-    height: 0,
+ Widget _buildXard() => Container(
+    margin: EdgeInsets.all(5),
+    width: 70,
+    height: 70,
 
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
+      shape: BoxShape.circle,
       color: Colors.blueGrey[900],
     ),
-    child: Column(
-      children: [
-        Icon(Icons.movie,color: Colors.blue,size: 50,),
-        //Text("Movie",style: TextStyle(fontSize: 5,color: Colors.white,))
-      ],
-    ),
+    child: Icon(Icons.movie,color: Colors.blue,size: 40,),
   );
-  buildZard() => Container(
-    margin: EdgeInsets.fromLTRB(4, 10, 0, 35),
-    width: 61,
-    height: 0,
+  Widget _buildZard() => Container(
+    margin: EdgeInsets.all(5),
+    width: 70,
+    height: 70,
 
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
+      shape: BoxShape.circle,
       color: Colors.blueGrey[900],
     ),
-    child: Column(
-      children: [
-        Icon(Icons.lock,color: Colors.green,size: 50,),
-        //Text("Leave",style: TextStyle(fontSize: 5,color: Colors.white,))
-      ],
-    ),
+    child: Icon(Icons.lock,color: Colors.green,size: 40,),
   );
-  buildDard() => Container(
+ Widget _buildDard() => Container(
     margin: EdgeInsets.fromLTRB(40, 45, 0, 60),
     width: 200,
     //height: 70,
 
     decoration: BoxDecoration(
-      image: DecorationImage(image: Image.asset("lib/img/living.png").image,fit: BoxFit.cover),
+      image: DecorationImage(image: Image.asset("asset/img/living.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
     ),
@@ -255,58 +267,18 @@ class _LandingScreenState extends State<LandingScreen> {
               child: Text("Living\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t1/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
           Expanded(
             flex: 2,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-
-
-              ],
-            ),)],
+            child: _iconList(),
+          )],
       ),
     ),
   );
-  buildVard() => Container(
+  Widget _buildVard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 70,
 
     decoration: BoxDecoration(
-      image: DecorationImage(image: Image.asset("lib/img/kitchen.png").image,fit: BoxFit.cover),
+      image: DecorationImage(image: Image.asset("asset/img/kitchen.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
     ),
@@ -326,58 +298,19 @@ class _LandingScreenState extends State<LandingScreen> {
               child: Text("Kitchen\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
           Expanded(
             flex: 2,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-
-
-              ],
-            ),)],
+            child: _iconList(),
+          )
+        ],
       ),
     ),
   );
-  buildNard() => Container(
+ Widget _buildNard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 70,
 
     decoration: BoxDecoration(
-      image: DecorationImage(image: Image.asset("lib/img/hall.png").image,fit: BoxFit.cover),
+      image: DecorationImage(image: Image.asset("asset/img/hall.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
     ),
@@ -397,57 +330,18 @@ class _LandingScreenState extends State<LandingScreen> {
               child: Text("Hall\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t3/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
           Expanded(
             flex: 2,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-
-
-              ],
-            ),)],
+            child: _iconList(),
+          )
+        ],
       ),
     ),
   );
-  buildMard() => Container(
+  Widget _buildMard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 70,
     decoration: BoxDecoration(
-      image: DecorationImage(image: Image.asset("lib/img/game.png").image,fit: BoxFit.cover),
+      image: DecorationImage(image: Image.asset("asset/img/game.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       color: Colors.white,
     ),
@@ -469,57 +363,17 @@ class _LandingScreenState extends State<LandingScreen> {
               child: Text("Game\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t4/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
           Expanded(
             flex: 2,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-                Container(
-                  margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-                  width: 40,
-                  child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: 2),
-                  borderRadius: BorderRadius.circular(50),
-                ),),
-
-
-              ],
-            ),)],
+            child: _iconList(),
+          )],
       ),
     ),
   );
-  buildQard() => Container(
+  Widget _buildQard() => Container(
     margin: EdgeInsets.fromLTRB(10, 45, 0, 60),
     width: 200,
     //height: 20,
     decoration: BoxDecoration(
-      image: DecorationImage(image: Image.asset("lib/img/bedroom.png").image,fit: BoxFit.cover),
+      image: DecorationImage(image: Image.asset("asset/img/bedroom.png").image,fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(20),
       //color: Colors.white,
     ),
@@ -539,51 +393,56 @@ class _LandingScreenState extends State<LandingScreen> {
       child: Text("Bedroom\t\t\t\t\t\t\t\t\t\t\t5/5",style: TextStyle(fontSize: 20,color:Colors.white),)),
         Expanded(
           flex: 2,
-          child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-              width: 40,
-              child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,),decoration: BoxDecoration(
-              border: Border.all(color: Colors.white,width: 2),
-              borderRadius: BorderRadius.circular(50),
-            ),),
-            Container(
-              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-              width: 40,
-              child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
-              border: Border.all(color: Colors.white,width: 2),
-              borderRadius: BorderRadius.circular(50),
-            ),),
-            Container(
-              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-              width: 40,
-              child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
-              border: Border.all(color: Colors.white,width: 2),
-              borderRadius: BorderRadius.circular(50),
-            ),),
-            Container(
-              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-              width: 40,
-              child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
-              border: Border.all(color: Colors.white,width: 2),
-              borderRadius: BorderRadius.circular(50),
-            ),),
-            Container(
-              margin: EdgeInsets.fromLTRB(6, 10, 5, 15),
-              width: 40,
-              child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
-              border: Border.all(color: Colors.white,width: 2),
-              borderRadius: BorderRadius.circular(50),
-            ),),
-
-
-          ],
-        ),)],
+          child: _iconList(),
+        )
+        ],
       ),
     ),
   );
+
+   Widget _iconList() => ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        Container(
+          margin: EdgeInsets.all(5),
+          width: 40,
+          child: Center(child: Icon(Icons.add_reaction_outlined,color: Colors.white,size: 28,)),decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: null,
+          border: Border.all(color: Colors.white,width: 2),
+        ),),
+        Container(
+          margin: EdgeInsets.all(5),
+          width: 40,
+          child: Icon(Icons.call,color: Colors.white,size: 28,),decoration: BoxDecoration(
+          border: Border.all(color: Colors.white,width: 2),
+          shape: BoxShape.circle,
+        ),),
+        Container(
+          margin: EdgeInsets.all(5),
+          width: 40,
+          child: Icon(Icons.add_alarm,color: Colors.white,size: 28,),decoration: BoxDecoration(
+          border: Border.all(color: Colors.white,width: 2),
+          shape: BoxShape.circle,
+        ),),
+        Container(
+          margin: EdgeInsets.all(5),
+          width: 40,
+          child: Icon(Icons.add_business,color: Colors.white,size: 28,),decoration: BoxDecoration(
+          border: Border.all(color: Colors.white,width: 2),
+          shape: BoxShape.circle,
+        ),),
+        Container(
+          margin: EdgeInsets.all(5),
+          width: 40,
+          child: Icon(Icons.add_chart,color: Colors.white,size: 28,),decoration: BoxDecoration(
+          border: Border.all(color: Colors.white,width: 2),
+          shape: BoxShape.circle,
+        ),),
+
+
+      ],
+    );
 
 
 
