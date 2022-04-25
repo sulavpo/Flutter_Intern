@@ -240,7 +240,7 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Icon(
           Icons.sunny,
           color: Colors.yellow,
-          size: 40,
+          size: 41,
         ),
       );
   Widget _buildTard() => Container(
@@ -254,7 +254,7 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Icon(
           Icons.shield_moon_rounded,
           color: Colors.yellow,
-          size: 40,
+          size: 41,
         ),
       );
   Widget _buildWard() => Container(
@@ -268,7 +268,7 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Icon(
           Icons.music_note,
           color: Colors.red,
-          size: 40,
+          size: 41,
         ),
       );
   Widget _buildXard() => Container(
@@ -282,7 +282,7 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Icon(
           Icons.movie,
           color: Colors.blue,
-          size: 40,
+          size: 41,
         ),
       );
   Widget _buildZard() => Container(
@@ -296,7 +296,7 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Icon(
           Icons.lock,
           color: Colors.green,
-          size: 40,
+          size: 41,
         ),
       );
   Widget _buildDard() => Container(
