@@ -10,6 +10,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +90,7 @@ class _LandingScreenState extends State<LandingScreen> {
                                                 _buildTard(),
                                                 _buildWard(),
                                                 _buildXard(),
-                                                _buildZard()
+                                                _buildIard()
                                               ],
                                             ),
                                           )),
@@ -166,30 +167,31 @@ class _LandingScreenState extends State<LandingScreen> {
                     ),
                   )),
               Expanded(
-                  flex: 2,
-                  child: Container(
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        _buildDard(),
-                        SizedBox(width: 12),
-                        _buildVard(),
-                        SizedBox(width: 12),
-                        _buildNard(),
-                        SizedBox(width: 12),
-                        _buildMard(),
-                        SizedBox(width: 12),
-                        _buildQard(),
-                        SizedBox(width: 12),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[900],
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        )),
-                  )),
+                flex: 2,
+                child: Container(
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _buildDard(),
+                      SizedBox(width: 12),
+                      _buildVard(),
+                      SizedBox(width: 12),
+                      _buildNard(),
+                      SizedBox(width: 12),
+                      _buildMard(),
+                      SizedBox(width: 12),
+                      _buildQard(),
+                      SizedBox(width: 12),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey[900],
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )),
+                ),
+              ),
             ],
           ),
         ],
@@ -229,76 +231,66 @@ class _LandingScreenState extends State<LandingScreen> {
     );
   }
 
-  Widget _buildCard() => Container(
-        margin: EdgeInsets.all(5),
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueGrey[900],
-        ),
-        child: Icon(
-          Icons.sunny,
-          color: Colors.yellow,
-          size: 41,
-        ),
-      );
-  Widget _buildTard() => Container(
-        margin: EdgeInsets.all(5),
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueGrey[900],
-        ),
-        child: Icon(
-          Icons.shield_moon_rounded,
-          color: Colors.yellow,
-          size: 41,
-        ),
-      );
-  Widget _buildWard() => Container(
-        margin: EdgeInsets.all(5),
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueGrey[900],
-        ),
-        child: Icon(
-          Icons.music_note,
-          color: Colors.red,
-          size: 41,
-        ),
-      );
-  Widget _buildXard() => Container(
-        margin: EdgeInsets.all(5),
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueGrey[900],
-        ),
-        child: Icon(
-          Icons.movie,
-          color: Colors.blue,
-          size: 41,
-        ),
-      );
-  Widget _buildZard() => Container(
-        margin: EdgeInsets.all(5),
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueGrey[900],
-        ),
-        child: Icon(
-          Icons.lock,
-          color: Colors.green,
-          size: 41,
-        ),
-      );
+  Widget _buildCard() => ElevatedButton(
+      onPressed: () {},
+      child: Icon(
+        Icons.sunny,
+        size: 35,
+      ),
+      style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+           overlayColor: getColor(Colors.white, Colors.white),
+          foregroundColor: getColor(Colors.yellow, Colors.black),
+          //backgroundColor: getColor(Color.fromRGBO(38, 50, 56, 1), Colors.white),
+          backgroundColor: getColor(Color.fromRGBO(38, 50, 56, 1), Colors.blue)));
+  Widget _buildTard() => ElevatedButton(
+      onPressed: () {},
+      child: Icon(
+        Icons.shield_moon,
+        size: 35,
+        color: Colors.yellow,
+      ),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+        overlayColor: getColor(Colors.white, Colors.white),
+        backgroundColor: getColor(Color.fromRGBO(38, 50, 56, 1), Colors.white),
+      ));
+  Widget _buildWard() => ElevatedButton(
+      onPressed: () {},
+      child: Icon(
+        Icons.music_note,
+        color: Colors.red,
+        size: 35,
+      ),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+        overlayColor: getColor(Colors.white, Colors.white),
+        backgroundColor: getColor(Color.fromRGBO(38, 50, 56, 1), Colors.white),
+      ));
+  Widget _buildXard() => ElevatedButton(
+      onPressed: () {},
+      child: Icon(
+        Icons.movie,
+        size: 35,
+        color: Colors.blue,
+      ),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+        backgroundColor: getColor(Color.fromRGBO(38, 50, 56, 1), Colors.white),
+        overlayColor: getColor(Colors.white, Colors.white),
+      ));
+  Widget _buildIard() => ElevatedButton(
+      onPressed: () {},
+      child: Icon(
+        Icons.lock,
+        size: 35,
+        color: Colors.green,
+      ),
+      style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+          backgroundColor:
+              getColor(Color.fromRGBO(38, 50, 56, 1), Colors.white),
+          overlayColor: getColor(Colors.white, Colors.white)));
   Widget _buildDard() => Container(
         margin: EdgeInsets.fromLTRB(40, 45, 0, 60),
         width: 200,
@@ -528,7 +520,7 @@ class _LandingScreenState extends State<LandingScreen> {
           Container(
             margin: EdgeInsets.all(5),
             width: 40,
-            child: Icon(
+            child: const Icon(
               Icons.add_alarm,
               color: Colors.white,
               size: 28,
@@ -541,7 +533,7 @@ class _LandingScreenState extends State<LandingScreen> {
           Container(
             margin: EdgeInsets.all(5),
             width: 40,
-            child: Icon(
+            child: const Icon(
               Icons.add_business,
               color: Colors.white,
               size: 28,
@@ -566,4 +558,14 @@ class _LandingScreenState extends State<LandingScreen> {
           ),
         ],
       );
+  MaterialStateProperty<Color> getColor(Color colors, Color colorPressed) {
+    final getColor = (Set<MaterialState> states) {
+      if (states.contains(MaterialState.pressed)) {
+        return colorPressed;
+      } else {
+        return colors;
+      }
+    };
+    return MaterialStateProperty.resolveWith(getColor);
+  }
 }
