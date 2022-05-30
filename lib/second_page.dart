@@ -101,7 +101,7 @@ class _SecondPageState extends State<SecondPage> {
                         child:Stack(children: [Positioned(height:170,width:170,left:100,child: SvgPicture.asset(AppImages.Soe)),Positioned(top: 80,left: 20,right: 0,bottom: 60,
                         child: Text('\$97.88',style: TextStyle(color: Colors.black,fontSize: 25),)),
                         Positioned(top: 185,left:10,child: Text('Nike Air Max SC',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),Positioned(top: 210,left: 10,child: Text("Men's Shoes",style: TextStyle(color: Colors.grey),)),
-                        Positioned(right:20,bottom:20,child: Container(width: 50,height: 50,decoration: BoxDecoration(color:Colors.black,borderRadius: BorderRadius.circular(50)),))],)
+                        Positioned(right:20,bottom:20,child: Container(child: Icon(Icons.shopping_bag,size: 15,color: Colors.white,),width: 50,height: 50,decoration: BoxDecoration(color:Colors.black,borderRadius: BorderRadius.circular(50)),))],)
                                        ),
                       ),Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -109,7 +109,7 @@ class _SecondPageState extends State<SecondPage> {
                         child:Stack(children: [Positioned(height:170,width:170,left:100,child: SvgPicture.asset(AppImages.Soe)),Positioned(top: 80,left: 20,right: 0,bottom: 60,
                         child: Text('\$97.88',style: TextStyle(color: Colors.black,fontSize: 25),)),
                         Positioned(top: 185,left:10,child: Text('Nike Air Max SC',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),Positioned(top: 210,left: 10,child: Text("Men's Shoes",style: TextStyle(color: Colors.grey),)),
-                        Positioned(right:20,bottom:20,child: Container(width: 50,height: 50,decoration: BoxDecoration(color:Colors.black,borderRadius: BorderRadius.circular(50)),))],)
+                        Positioned(right:20,bottom:20,child: Container(child: Icon(Icons.shopping_bag,size: 15,color: Colors.white,),width: 50,height: 50,decoration: BoxDecoration(color:Colors.black,borderRadius: BorderRadius.circular(50)),))],)
                                        ),
                       ),
                     ],
