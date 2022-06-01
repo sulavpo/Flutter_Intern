@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/apiservice.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:myapp/landing_screen.dart';
 
 String? finalToken;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+  static const String routeName = "/home-page";
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,35 +17,24 @@ class _HomePageState extends State<HomePage> {
   bool hidePassword = true;
   final emailText = TextEditingController();
   final passwordText = TextEditingController();
+  String? token;
 
   //Mark:API Call
   callLoginApi() {
     final service = ApiService();
-
-    service.apiCallLogin(
-      {
-        "email": emailText.text,
-        "password": passwordText.text,
-      },
-    ).then((value) {
-      if (value.error != null) {
-        print("get data >>>>>" + value.error!);
+    service.apiCallLogin({
+      "email": emailText.text,
+      "password": passwordText.text,
+    }, context).then((value) {
+      if (value?.error != null) {
+        print("get data >>>>>" + value!.error.toString());
       } else {
-        print(value.token);
+        print(value?.token);
       }
     });
   }
 
-  Future getValidationData() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    var obtainedEmail = sharedPreferences.getString('token');
-    setState(() {
-      finalToken = obtainedEmail;
-    });
-    print(finalToken);
-  }
-
+  
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -109,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                       child: TextFormField(
                         controller: passwordText,
                         obscureText: hidePassword,
-                        validator: (input) => input!.length < 3
+                        validator: (input) => input != null && input.length < 3
                             ? 'Password should be more than 3 '
                             : null,
                         decoration: (InputDecoration(
@@ -134,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 20.0, vertical: 20),
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         callLoginApi();
                       }
