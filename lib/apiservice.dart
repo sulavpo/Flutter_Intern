@@ -12,20 +12,27 @@ class ApiService {
     http.Response? response = await http.post(url, body: param);
     // print('Response status: ${response.statusCode}');
     // print('Response body: ${response.body}');
+
+    //if the statusCode from respond is 200 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
+      //caling LoginResponse and saving token data inside token and error in error pulling api
       loginResponse =
           LoginApiResponse(token: data["token"], error: data["error"]);
+          //
       final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       sharedPreferences.setString('token', data['token']);
+      //routing or navigating to Langing page
       Navigator.pushNamed(context, LandingPage.routeName);
     } else {
+       //if the statusCode from respond isnot  200 alert message
       await _showDialog(context);
     }
     return loginResponse;
   }
 }
+
 
 class LoginApiResponse {
   final String? token;
@@ -33,6 +40,8 @@ class LoginApiResponse {
   LoginApiResponse({this.token, this.error});
 }
 
+
+//for alert message
 _showDialog(BuildContext context) {
   return showDialog(
       context: context,
