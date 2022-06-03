@@ -33,7 +33,9 @@ class _SecondPageState extends State<SecondPage> {
               ElevatedButton(
                 child: const Text("OK"),
                 onPressed: () {
+
                   //Navigator.pushNamed(context, "/screen1");
+
                   Navigator.pop(context);
                 },
               ),
@@ -62,24 +64,35 @@ class _SecondPageState extends State<SecondPage> {
 }
 
 void getTime(String path) async {
+
   //make the request
+
   final response = await http.get(Uri.parse("${ApiEndpoints.baseUrl}$path"));
 
   // sample info available in response
+
   final statusCode = response.statusCode;
   if (statusCode == 200) {
     Map data = jsonDecode(response.body);
-    //print(data);
+
+    //print(data); done to check if there is an error
+
     String datetime = data['datetime'];
     //String offset = data['utc_offset'];
+    // done to check if there is an error
+
 
     //get properties from data
-    //print(datetime);
-    //print(offset);
+    //print(datetime);  // done to check the error
+    //print(offset);   // done to check the error
+
+    //store the value in date ,time and times
+
     var date = datetime.split("T").first;
     var times = datetime.split("T").last;
 
     var time = times.split(".").first;
+    //if the case is true print dialouge box
 
     showDialog(
         context: AppSettings.navigatorKey.currentContext!,
@@ -104,6 +117,9 @@ void getTime(String path) async {
 
     //create DateTime object
   } else {
+
+    //if wrong print not working
+    
     print('not working');
   }
 }

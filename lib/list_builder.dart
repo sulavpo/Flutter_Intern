@@ -4,8 +4,12 @@ import 'package:myapp/constants/api_endpoints.dart';
 import 'package:myapp/second_page.dart';
 import 'package:myapp/constants/images.dart';
 
+//making list where its class is LogoPart and is saved in logoPartList
+
 List<LogoPart> logoPartList = <LogoPart>[
   LogoPart(
+
+  //part 1
     title: 'Nepal-Kathmandu',
     imageName: AppImages.nepal,
     onTap: () {
@@ -13,6 +17,8 @@ List<LogoPart> logoPartList = <LogoPart>[
     },
   ),
   LogoPart(
+
+    //part 2
     title: 'America',
     imageName: AppImages.america,
     onTap: () {
@@ -20,6 +26,8 @@ List<LogoPart> logoPartList = <LogoPart>[
     },
   ),
   LogoPart(
+
+    //part 3
     title: 'India',
     imageName: AppImages.india,
     onTap: () {
@@ -27,6 +35,9 @@ List<LogoPart> logoPartList = <LogoPart>[
     },
   ),
   LogoPart(
+
+
+    //part 4
     title: 'China',
     imageName: AppImages.china,
     onTap: () {
@@ -35,11 +46,16 @@ List<LogoPart> logoPartList = <LogoPart>[
   ),
 ];
 
+//LogoPart class where tittle,imageName,color and function is initalized 
+//as String,String,Color and void Function
+
 class LogoPart extends StatelessWidget {
   final String title;
   final String imageName;
   final Color color;
   final void Function() onTap;
+
+  //constructor
 
   const LogoPart(
       {Key? key,
@@ -48,6 +64,9 @@ class LogoPart extends StatelessWidget {
       this.color = Colors.white,
       required this.onTap})
       : super(key: key);
+
+      //what and How to diaplay?
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +83,8 @@ class LogoPart extends StatelessWidget {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(1000),
                     child: SvgPicture.asset(
+                      //variable imageName is shown
+                      
                       imageName,
                       fit: BoxFit.fill,
                     ))),

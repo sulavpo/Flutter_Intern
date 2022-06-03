@@ -7,6 +7,9 @@ import 'fourth_page.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
+
+  //used for route handleing
+
   static const String routeName = "/first-page";
 
   @override
@@ -14,8 +17,17 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
+ // Inatializing and declaring selectedIndex as value 0
+
   int selectedIndex = 0;
+
+//data type page controller
+
   final PageController _pageController = PageController();
+
+
+// creating list 
 
   final List<Widget> _screen = const [
     ThirdPage(),
@@ -27,11 +39,20 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
+
+      //to use backgroundColor = color transparent we need to extendBody = true
+
       extendBody: true,
+
+// use of bottom NavigationBAr and Curved NAvigation bar (i.e Curved NAvigation bar is package)
+
       bottomNavigationBar: CurvedNavigationBar(
+
+        //here index is equal to selectedIndex
+
         index: selectedIndex,
         backgroundColor: Colors.transparent,
-        // key: NavbarKey.getkey(),
+
         items: const [
           Icon(
             Icons.home,
@@ -50,6 +71,8 @@ class _FirstPageState extends State<FirstPage> {
             size: 20,
           )
         ],
+        //  by using page controller.jumpToPage(selectedIndex)
+
         onTap: (index) {
           setState(() {
             selectedIndex = index;
@@ -57,8 +80,11 @@ class _FirstPageState extends State<FirstPage> {
           _pageController.jumpToPage(selectedIndex);
         },
         animationCurve: Curves.easeOut,
-        //animationDuration: const Duration(milliseconds: 20),
+   
       ),
+
+      //here on pagechange set state as selected index
+      
       body: PageView(
         controller: _pageController,
         children: _screen,
