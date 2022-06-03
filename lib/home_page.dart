@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.only(top: 120),
-        //form weidget should be used in textformfield
+        //form widget should be used in textformfield
         child: Form(
           //key as _formhey
           key: _formKey,

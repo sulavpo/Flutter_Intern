@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:myapp/landing_screen.dart';
+import 'package:myapp/first_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
@@ -24,7 +24,7 @@ class ApiService {
           await SharedPreferences.getInstance();
       sharedPreferences.setString('token', data['token']);
       //routing or navigating to Langing page
-      Navigator.pushNamed(context, LandingPage.routeName);
+      Navigator.pushNamed(context, FirstPage.routeName);
     } else {
        //if the statusCode from respond isnot  200 alert message
       await _showDialog(context);

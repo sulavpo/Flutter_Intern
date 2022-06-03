@@ -18,8 +18,8 @@ class _LandingPageState extends State<LandingPage> {
   //to use in the widget tree
   shared() async {
 
-    final SharedPreferences _pref = await SharedPreferences.getInstance();
-    String? token = _pref.getString("token");
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? token = pref.getString("token");
     //added token value 
     accessToken = token;
     setState(() {
@@ -37,7 +37,8 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('LandingPage')),
+      backgroundColor: Colors.purple,
+      //appBar: AppBar(title: const Text('LandingPage')),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +46,7 @@ class _LandingPageState extends State<LandingPage> {
           Text(
             //showing value stored in acessToken varibale
             'hello $accessToken',
-            style: TextStyle(fontSize: 50, color: Colors.yellow),
+            style: const TextStyle(fontSize: 50, color: Colors.yellow),
           ),
           MaterialButton(
               color: Colors.blue,
