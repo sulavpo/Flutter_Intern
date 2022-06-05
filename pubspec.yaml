@@ -40,6 +40,8 @@ dependencies:
   flutter_bloc: ^8.0.1
   google_fonts: ^3.0.1
   http: ^0.13.3
+  hydrated_bloc: ^8.1.0
+  path_provider: ^2.0.9
   toggle_switch: ^2.0.1
   shared_preferences: ^2.0.15
   

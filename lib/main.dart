@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/models/task.dart';
 import 'package:myapp/pages/first_page.dart';
 import 'package:myapp/pages/home_page.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/bloc_exports.dart';
 import 'routes.dart';
@@ -16,12 +16,16 @@ void main() async {
 
   final SharedPreferences _pref = await SharedPreferences.getInstance();
   String? token = _pref.getString("token");
+  final storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
 
-  BlocOverrides.runZoned(() => runApp(MyApp(
+
+  HydratedBlocOverrides.runZoned(() => runApp(MyApp(
         //here token is token
 
         token: token,
-      )));
+      )),
+      storage: storage,);
 }
 
 //when we declare navigator key globally no need to declare context everywhere
@@ -39,8 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          BlocsBloc()..add(AddTask(task: Task(title: 'Task1'))),
+      create: (context) => BlocsBloc(),
       child: MaterialApp(
         title: 'Lofo',
         debugShowCheckedModeBanner: false,

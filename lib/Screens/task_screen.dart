@@ -34,7 +34,7 @@ class _TaskScreenState extends State<TaskScreen> {
       builder: (context, state) {
         List<Task> taskList = state.allTasks;
         return Scaffold(
-          backgroundColor: Colors.yellow,
+          backgroundColor: Colors.grey[200],
           extendBody: true,
           appBar: AppBar(title: const Text('To Do List'), actions: [
             IconButton(
@@ -48,7 +48,7 @@ class _TaskScreenState extends State<TaskScreen> {
               const Center(
                 child: Chip(
                   label: Text('Tasks:'),
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.white,
                 ),
               ),
               TaskList(taskList: taskList)
