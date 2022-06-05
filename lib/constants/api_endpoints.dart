@@ -7,5 +7,5 @@ class ApiEndpoints {
   static const String kathmandu = "Asia/Kathmandu";
   static const String america = "America/New_York";
   static const String india = "Asia/Kolkata";
-  static const String japan = "Asia/Tokyo";
+  static const String hongkung = "Asia/Hong_Kong";
 }

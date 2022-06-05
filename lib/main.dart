@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/models/task.dart';
+import 'package:myapp/pages/first_page.dart';
+import 'package:myapp/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'first_page.dart';
-import 'home_page.dart';
+import 'bloc/bloc_exports.dart';
 import 'routes.dart';
 
 void main() async {
-
-
 //get string token from api and storing it in token variable(i.e which is token is a stringwhich can be null)
 //?-means it can be null & !- means it is forcefully null
 
@@ -16,14 +16,13 @@ void main() async {
 
   final SharedPreferences _pref = await SharedPreferences.getInstance();
   String? token = _pref.getString("token");
-  runApp(MyApp(
 
-    //here token is token
+  BlocOverrides.runZoned(() => runApp(MyApp(
+        //here token is token
 
-    token: token,
-  ));
+        token: token,
+      )));
 }
-
 
 //when we declare navigator key globally no need to declare context everywhere
 
@@ -32,7 +31,6 @@ class AppSettings {
 }
 
 class MyApp extends StatelessWidget {
-
   // class myapp is calling and constructor
 
   final String? token;
@@ -40,20 +38,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Lofo',
-      debugShowCheckedModeBanner: false,
-      navigatorKey: AppSettings.navigatorKey,
+    return BlocProvider(
+      create: (context) =>
+          BlocsBloc()..add(AddTask(task: Task(title: 'Task1'))),
+      child: MaterialApp(
+        title: 'Lofo',
+        debugShowCheckedModeBanner: false,
+        navigatorKey: AppSettings.navigatorKey,
 
-      //go to route handler (i.e routes.dart page)
+        //go to route handler (i.e routes.dart page)
 
-      onGenerateRoute: RouteHandler.generateRoute,
+        onGenerateRoute: RouteHandler.generateRoute,
 
-      //when we open app is the token is there in sharedpreference open Landing page if not go to Home page
+        //when we open app is the token is there in sharedpreference open Landing page if not go to Home page
 
-     initialRoute: token != null ? FirstPage.routeName : HomePage.routeName,
-     
-      //home: token != null ? const LandingPage() : const HomePage(),
+        initialRoute: token != null ? FirstPage.routeName : HomePage.routeName,
+
+        //home: token != null ? const LandingPage() : const HomePage(),
+      ),
     );
   }
 }

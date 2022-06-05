@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:myapp/landing_screen.dart';
+import 'package:myapp/Screens/task_screen.dart';
+import 'landing_screen.dart';
 import 'third_page.dart';
 import 'second_page.dart';
-import 'fourth_page.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -17,8 +17,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-
- // Inatializing and declaring selectedIndex as value 0
+  // Inatializing and declaring selectedIndex as value 0
 
   int selectedIndex = 0;
 
@@ -26,19 +25,18 @@ class _FirstPageState extends State<FirstPage> {
 
   final PageController _pageController = PageController();
 
+// creating list
 
-// creating list 
-
-  final List<Widget> _screen = const [
+  final List<Widget> _screen = [
     ThirdPage(),
     SecondPage(),
     LandingPage(),
-    FourthPage()
+    TaskScreen()
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      // backgroundColor: Colors.blue,
 
       //to use backgroundColor = color transparent we need to extendBody = true
 
@@ -47,7 +45,6 @@ class _FirstPageState extends State<FirstPage> {
 // use of bottom NavigationBAr and Curved NAvigation bar (i.e Curved NAvigation bar is package)
 
       bottomNavigationBar: CurvedNavigationBar(
-
         //here index is equal to selectedIndex
 
         index: selectedIndex,
@@ -80,11 +77,10 @@ class _FirstPageState extends State<FirstPage> {
           _pageController.jumpToPage(selectedIndex);
         },
         animationCurve: Curves.easeOut,
-   
       ),
 
       //here on pagechange set state as selected index
-      
+
       body: PageView(
         controller: _pageController,
         children: _screen,

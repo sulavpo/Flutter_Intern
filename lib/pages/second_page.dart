@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:myapp/constants/api_endpoints.dart';
 import 'package:myapp/main.dart';
 import 'dart:convert';
-import 'list_builder.dart';
+import '../list_builder.dart';
+
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -20,46 +21,46 @@ class _SecondPageState extends State<SecondPage> {
     // getTime();
   }
 
-  _showDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text(
-              "Error:User credentials wrong",
-              style: TextStyle(color: Colors.red, fontSize: 18),
-            ),
-            actions: <Widget>[
-              ElevatedButton(
-                child: const Text("OK"),
-                onPressed: () {
+  // _showDialog(BuildContext context) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           title: const Text(
+  //             "Error:User credentials wrong",
+  //             style: TextStyle(color: Colors.red, fontSize: 18),
+  //           ),
+  //           actions: <Widget>[
+  //             ElevatedButton(
+  //               child: const Text("OK"),
+  //               onPressed: () {
 
-                  //Navigator.pushNamed(context, "/screen1");
+  //                 //Navigator.pushNamed(context, "/screen1");
 
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
-  }
+  //                 Navigator.pop(context);
+  //               },
+  //             ),
+  //           ],
+  //         );
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: logoPartList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: LogoPart(
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      body: PageView.builder(
+          itemCount: logoPartList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return LogoPart(
               imageName: logoPartList[index].imageName,
               title: logoPartList[index].title,
               color: logoPartList[index].color,
               onTap: logoPartList[index].onTap,
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:myapp/constants/api_endpoints.dart';
-import 'package:myapp/second_page.dart';
+import 'package:myapp/pages/second_page.dart';
 import 'package:myapp/constants/images.dart';
 
 //making list where its class is LogoPart and is saved in logoPartList
@@ -19,7 +19,7 @@ List<LogoPart> logoPartList = <LogoPart>[
   LogoPart(
 
     //part 2
-    title: 'America',
+    title: 'America-New York',
     imageName: AppImages.america,
     onTap: () {
       getTime(ApiEndpoints.america);
@@ -28,7 +28,7 @@ List<LogoPart> logoPartList = <LogoPart>[
   LogoPart(
 
     //part 3
-    title: 'India',
+    title: 'India-Kolkata',
     imageName: AppImages.india,
     onTap: () {
       getTime(ApiEndpoints.india);
@@ -38,10 +38,10 @@ List<LogoPart> logoPartList = <LogoPart>[
 
 
     //part 4
-    title: 'China',
-    imageName: AppImages.china,
+    title: 'Hong Kong',
+    imageName: AppImages.hong,
     onTap: () {
-      getTime(ApiEndpoints.japan);
+      getTime(ApiEndpoints.hongkung);
     },
   ),
 ];
@@ -73,7 +73,7 @@ class LogoPart extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(23, 120, 50, 50),
+        padding: const EdgeInsets.fromLTRB(50, 200, 50, 50),
         child: Column(
           children: [
             Container(
@@ -92,7 +92,7 @@ class LogoPart extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 40),
+                style: const TextStyle(fontSize: 30),
               ),
             )
           ],
