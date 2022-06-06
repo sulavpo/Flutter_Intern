@@ -66,31 +66,32 @@ class ScrollPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(50, 200, 50, 50),
-        child: Column(
-          children: [
-            Container(
-                width: 300,
-                height: 300,
-                decoration: BoxDecoration(shape: BoxShape.rectangle, color: color),
+      child: Column(
+        children: [
+          Container(
+
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(shape: BoxShape.rectangle),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(50),
                     child: SvgPicture.asset(
                       //variable imageName is shown
                       
                       imageName,
                       fit: BoxFit.fill,
-                    ))),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                title,
-                style: const TextStyle(fontSize: 30),
-              ),
-            )
-          ],
-        ),
+                    )),
+              )),
+          Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Text(
+              title,
+              style: const TextStyle(fontSize: 10),
+            ),
+          )
+        ],
       ),
     );
   }

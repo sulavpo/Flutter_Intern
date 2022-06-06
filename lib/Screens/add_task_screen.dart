@@ -40,6 +40,7 @@ class AddTaskScreen extends StatelessWidget {
         ElevatedButton(
             onPressed: (() {
               var task = Task(
+                id: titleController.text,
                 title: titleController.text,
               );
               context.read<BlocsBloc>().add(AddTask(task: task));

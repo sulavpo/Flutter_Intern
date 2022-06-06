@@ -21,9 +21,10 @@ extension LoopList<T> on List {
 
 class _ThirdPageState extends State<ThirdPage> {
   //decleration of pagecontroller  where initial page is 0
+  final PageController _pageController = PageController(initialPage: 0);
 
   final ScrollController _scrollController = ScrollController();
-  // int _currentPage = 0;
+  int _currentPage = 0;
 
   bool end = false;
   @override
@@ -34,25 +35,25 @@ class _ThirdPageState extends State<ThirdPage> {
       double minScrollExtend1 = _scrollController.position.minScrollExtent;
       double maxScrollExtend1 = _scrollController.position.maxScrollExtent;
 
-      animateToMaxMin(maxScrollExtend1, minScrollExtend1, maxScrollExtend1, 10,
+      animateToMaxMin(maxScrollExtend1, minScrollExtend1, maxScrollExtend1, 2,
           _scrollController);
     });
 
     //use for animation
 
-    // Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-    //to go to next page automatically
+    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      //to go to next page automatically
 
-    // _currentPage++;
+      // _currentPage++;
 
-    //animation part use for Duration and automatically go to next page
+      //animation part use for Duration and automatically go to next page
 
-    // _scrollController.animateToPage(
-    //   _currentPage,
-    //   duration: const Duration(milliseconds: 1000),
-    //   curve: Curves.linear,
-    // );
-    // });
+      _pageController.animateToPage(
+        _currentPage++,
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.linear,
+      );
+    });
   }
 
   animateToMaxMin(double max, double min, double direction, int seconds,
@@ -72,15 +73,35 @@ class _ThirdPageState extends State<ThirdPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      body: ListView.builder(
-          itemCount: scrollPartList.length,
-          scrollDirection: Axis.horizontal,
-          controller: _scrollController,
-          itemBuilder: (context, index) {
-            //  using above loop extension with and calling scrollPArtlist
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: ListView.builder(
+                  itemCount: scrollPartList.length,
+                  scrollDirection: Axis.horizontal,
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    //  using above loop extension with and calling scrollPArtlist
 
-            return scrollPartList[index];
-          }),
+                    return scrollPartList[index];
+                  }),
+            ),
+            Expanded(
+              flex: 1,
+              child: PageView.builder(
+                  scrollDirection: Axis.horizontal,
+                  controller: _pageController,
+                  itemBuilder: (context, index) {
+                    //  using above loop extension with and calling scrollPArtlist
+
+                    return scrollPartList.loop(index);
+                  }),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
