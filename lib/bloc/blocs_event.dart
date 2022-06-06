@@ -2,9 +2,8 @@ part of 'blocs_bloc.dart';
 
 abstract class BlocsEvent extends Equatable {
   const BlocsEvent();
-   @override
+  @override
   List<Object> get props => [];
-
 }
 
 class AddTask extends BlocsEvent {
@@ -15,8 +14,8 @@ class AddTask extends BlocsEvent {
 
   @override
   List<Object> get props => [task];
-
 }
+
 class UpdateTask extends BlocsEvent {
   final Task task;
   const UpdateTask({
@@ -25,8 +24,8 @@ class UpdateTask extends BlocsEvent {
 
   @override
   List<Object> get props => [task];
-
 }
+
 class DeleteTask extends BlocsEvent {
   final Task task;
   const DeleteTask({
@@ -35,5 +34,11 @@ class DeleteTask extends BlocsEvent {
 
   @override
   List<Object> get props => [task];
+}
 
+class FetchTask extends BlocsEvent {
+  const FetchTask();
+
+  @override
+  List<Object> get props => [];
 }

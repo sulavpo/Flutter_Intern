@@ -21,6 +21,8 @@ class _SecondPageState extends State<SecondPage> {
     // getTime();
   }
 
+  
+
   // _showDialog(BuildContext context) {
   //   return showDialog(
   //       context: context,
@@ -59,7 +61,8 @@ class _SecondPageState extends State<SecondPage> {
               color: logoPartList[index].color,
               onTap: logoPartList[index].onTap,
             );
-          }),
+          }
+          ),
     );
   }
 }

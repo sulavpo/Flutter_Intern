@@ -7,15 +7,13 @@ import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
 
 class TaskScreen extends StatefulWidget {
-  TaskScreen({Key? key}) : super(key: key);
+  const TaskScreen({Key? key}) : super(key: key);
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
 }
 
 class _TaskScreenState extends State<TaskScreen> {
- 
-
   void _addTask(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -23,7 +21,7 @@ class _TaskScreenState extends State<TaskScreen> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(),
+                child: const AddTaskScreen(),
               ),
             ));
   }
@@ -67,4 +65,3 @@ class _TaskScreenState extends State<TaskScreen> {
     );
   }
 }
-

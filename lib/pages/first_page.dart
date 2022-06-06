@@ -28,10 +28,10 @@ class _FirstPageState extends State<FirstPage> {
 // creating list
 
   final List<Widget> _screen = [
-    ThirdPage(),
-    SecondPage(),
-    LandingPage(),
-    TaskScreen()
+    const ThirdPage(),
+    const SecondPage(),
+    const LandingPage(),
+    const TaskScreen()
   ];
   @override
   Widget build(BuildContext context) {

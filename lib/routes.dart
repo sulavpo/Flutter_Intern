@@ -18,7 +18,7 @@ class RouteHandler {
         case SecondPage.routeName:
         return MaterialPageRoute(builder: (context) => const SecondPage());
       default:
-        return MaterialPageRoute(builder: (context) => HomePage());
+        return MaterialPageRoute(builder: (context) => const HomePage());
     }
   }
 }

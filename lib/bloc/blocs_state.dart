@@ -11,13 +11,12 @@ class BlocsState extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'allTasks': allTasks.map((x) => x.toMap()).toList(),
+      'allTask': allTasks.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory BlocsState.fromMap(Map<String, dynamic> map){
+  factory BlocsState.fromMap(Map<String, dynamic> map) {
     return BlocsState(
-      allTasks: List<Task>.from(map['allTask']?.map((x) => Task.fromMap(x)))
-    );
+        allTasks: List<Task>.from(map['allTask']?.map((x) => Task.fromMap(x))));
   }
 }

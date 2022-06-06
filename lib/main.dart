@@ -10,22 +10,25 @@ void main() async {
 //get string token from api and storing it in token variable(i.e which is token is a stringwhich can be null)
 //?-means it can be null & !- means it is forcefully null
 
+//to initialize all asynchronous functions during main function running
   WidgetsFlutterBinding.ensureInitialized();
 
   //_SharedPreference is await bez it can take time(i.e async)
 
   final SharedPreferences _pref = await SharedPreferences.getInstance();
   String? token = _pref.getString("token");
-  final storage = await HydratedStorage.build(
-      storageDirectory: await getApplicationDocumentsDirectory());
 
-
-  HydratedBlocOverrides.runZoned(() => runApp(MyApp(
+  HydratedBlocOverrides.runZoned(
+    () => runApp(
+      MyApp(
         //here token is token
 
         token: token,
-      )),
-      storage: storage,);
+      ),
+    ),
+    storage: await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory(),
+  ));
 }
 
 //when we declare navigator key globally no need to declare context everywhere
