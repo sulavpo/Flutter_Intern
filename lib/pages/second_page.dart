@@ -18,35 +18,11 @@ class _SecondPageState extends State<SecondPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // getTime();
   }
 
   
 
-  // _showDialog(BuildContext context) {
-  //   return showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           title: const Text(
-  //             "Error:User credentials wrong",
-  //             style: TextStyle(color: Colors.red, fontSize: 18),
-  //           ),
-  //           actions: <Widget>[
-  //             ElevatedButton(
-  //               child: const Text("OK"),
-  //               onPressed: () {
-
-  //                 //Navigator.pushNamed(context, "/screen1");
-
-  //                 Navigator.pop(context);
-  //               },
-  //             ),
-  //           ],
-  //         );
-  //       });
-  // }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +55,7 @@ void getTime(String path) async {
   if (statusCode == 200) {
     Map data = jsonDecode(response.body);
 
-    //print(data); done to check if there is an error
+    print(data); //done to check if there is an error
 
     String datetime = data['datetime'];
     //String offset = data['utc_offset'];

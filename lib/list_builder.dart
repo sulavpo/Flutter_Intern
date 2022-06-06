@@ -77,8 +77,8 @@ class LogoPart extends StatelessWidget {
         child: Column(
           children: [
             Container(
-                width: 300,
-                height: 300,
+                width: 250,
+                height: 250,
                 decoration: BoxDecoration(shape: BoxShape.circle, color: color),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(1000),
@@ -89,10 +89,10 @@ class LogoPart extends StatelessWidget {
                       fit: BoxFit.fill,
                     ))),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(20.0),
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 30),
+                style: const TextStyle(fontSize: 25),
               ),
             )
           ],
