@@ -77,6 +77,7 @@ class LogoPart extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(50, 200, 50, 50),
         child: Column(
           children: [
+               
             Container(
                 width: 135,
                 height: 135,
@@ -89,6 +90,7 @@ class LogoPart extends StatelessWidget {
                       imageName,
                       fit: BoxFit.fill,
                     ))),
+                    
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(

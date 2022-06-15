@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:blco_api/constants/api_endpoints.dart';
+import 'package:blco_api/cubit/theme_cubit.dart';
 import 'package:blco_api/main.dart';
 import 'package:blco_api/model/model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -19,6 +21,20 @@ class _ClockPageState extends State<ClockPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+         SafeArea(
+           child: BlocBuilder<ThemeCubit, bool>(
+                builder: (context, state) {
+                  return SwitchListTile(
+                    value: state,
+                    onChanged: (value) {
+                      BlocProvider.of<ThemeCubit>(context)
+                          .toogleTheme(value: value);
+                    },
+                    title: const Text('Toggle Theme'),
+                  );
+                },
+              ),
+         ),
         Expanded(
           flex: 4,
           child: Padding(
@@ -79,7 +95,7 @@ void getTime(String path) async {
         context: AppSettings.navigatorKey.currentContext!,
         builder: (context) {
           return AlertDialog(
-            backgroundColor: Colors.blueGrey[800],
+            backgroundColor: Colors.blueGrey[700],
 
             content: SizedBox(
               height: 250,

@@ -1,5 +1,8 @@
 import 'dart:ui';
 
+import 'package:blco_api/constants/image.dart';
+import 'package:blco_api/cubit/theme_cubit.dart';
+import 'package:blco_api/model/failure_model.dart';
 import 'package:blco_api/model/weather_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +33,18 @@ class _WeatherPageState extends State<WeatherPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            BlocBuilder<ThemeCubit, bool>(
+              builder: (context, state) {
+                return SwitchListTile(
+                  value: state,
+                  onChanged: (value) {
+                    BlocProvider.of<ThemeCubit>(context)
+                        .toogleTheme(value: value);
+                  },
+                  title: const Text('Toggle Theme'),
+                );
+              },
+            ),
             Center(
               child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -39,7 +54,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       // borderRadius: BorderRadius.circular(20),
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: Image.asset('assets/img/earth.jpg').image,
+                          image: Image.asset(AppImages.earth).image,
                           fit: BoxFit.fill))),
             ),
             const Padding(
@@ -72,7 +87,10 @@ class _WeatherPageState extends State<WeatherPage> {
               listener: (context, state) {
                 if (state is LoadedWeatherState) {
                   _showDialog(state.model);
-                  c = (double.parse(state.model.main!.temp!) - 273.15).roundToDouble();
+                  c = (double.parse(state.model.main!.temp!) - 273.15)
+                      .roundToDouble();
+                } else if (state is LoadingFailedWeatherState) {
+                  _showToast(state.failure);
                 }
               },
               child: Padding(
@@ -97,12 +115,23 @@ class _WeatherPageState extends State<WeatherPage> {
     );
   }
 
+  _showToast(FailureModel model) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(model.message),
+        action: SnackBarAction(
+            label: 'OK', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
   _showDialog(WeatherModel model) {
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-              backgroundColor: Colors.blueGrey[900],
+              backgroundColor: Colors.blueGrey[800],
               content: SizedBox(
                 height: 220,
                 width: 270,
@@ -168,21 +197,30 @@ class _WeatherPageState extends State<WeatherPage> {
                         padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
                         child: Text(
                           " $c °C",
-                          style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(45, 100, 0, 0),
                         child: Text(
                           " ${model.main!.pressure}",
-                          style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(50, 100, 0, 0),
                         child: Text(
                           " ${model.main!.humidity}",
-                          style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
                         ),
                       )
                     ],
@@ -203,30 +241,7 @@ class _WeatherPageState extends State<WeatherPage> {
                     ),
                   )
                 ]),
-              )
-              // Column(
-              //   mainAxisSize: MainAxisSize.min,
-              //   children: [
-              //     Align(
-              //       alignment: Alignment.topLeft,
-              //       child: Text(
-              //         "Humidity: ${model.main!.humidity}",
-              //       ),
-              //     ),
-              //     Align(alignment: Alignment.topLeft,child: Text("Pressure:  ${model.main!.pressure} ")),
-              //     Align(alignment: Alignment.topLeft,child: Text("Temp_min:  ${model.main!.tempMin}")),
-              //     Align(alignment: Alignment.topLeft,child: Text('Temp_max:  ${model.main!.tempMax}')),
-              //     Align(alignment: Alignment.topLeft,child: Text('Temp: ${model.main!.temp} ')),
-              //     ElevatedButton(
-              //       child: const Text("OK"),
-              //       onPressed: () {
-              //         //Navigator.pushNamed(context, "/screen1");
-              //         Navigator.pop(context);
-              //       },
-              //     )
-              //   ],
-              // )
-              );
+              ));
         });
   }
 }

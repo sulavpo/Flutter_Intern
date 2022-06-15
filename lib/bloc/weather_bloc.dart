@@ -1,4 +1,6 @@
+import 'package:blco_api/model/failure_model.dart';
 import 'package:bloc/bloc.dart';
+// import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../http/weather_repo.dart';
@@ -12,9 +14,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     on<FetchWeatherEvent>((event, emit) async {
       WeatherModel? model;
       emit(LoadingWeatherState());
-      model = await WeatherRepo().getWeather(cityname: event.cityName);
-      print(model);
-      emit(LoadedWeatherState(model: model!));
+      final response = await WeatherRepo().getWeather(cityname: event.cityName);
+      emit(response.fold((l) => LoadedWeatherState(model: l), (r) => LoadingFailedWeatherState(failure: r)));
     });
   }
 }

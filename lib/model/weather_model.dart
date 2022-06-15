@@ -82,14 +82,14 @@ class WeatherModel {
 }
 
 class Coord {
-  double? lon;
-  double? lat;
+  String? lon;
+  String? lat;
 
   Coord({this.lon, this.lat});
 
   Coord.fromJson(Map<String, dynamic> json) {
-    lon = json['lon'];
-    lat = json['lat'];
+    lon = json['lon'].toString();
+    lat = json['lat'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -110,9 +110,9 @@ class Weather {
 
   Weather.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    main = json['main'];
-    description = json['description'];
-    icon = json['icon'];
+    main = json['main'].toString();
+    description = json['description'].toString();
+    icon = json['icon'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -163,14 +163,14 @@ class Main {
 }
 
 class Wind {
-  double? speed;
-  int? deg;
+  String? speed;
+  String? deg;
 
   Wind({this.speed, this.deg});
 
   Wind.fromJson(Map<String, dynamic> json) {
-    speed = json['speed'];
-    deg = json['deg'];
+    speed = json['speed'].toString();
+    deg = json['deg'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -182,12 +182,12 @@ class Wind {
 }
 
 class Clouds {
-  int? all;
+  String? all;
 
   Clouds({this.all});
 
   Clouds.fromJson(Map<String, dynamic> json) {
-    all = json['all'];
+    all = json['all'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -198,20 +198,20 @@ class Clouds {
 }
 
 class Sys {
-  int? type;
+  String? type;
   int? id;
   String? country;
-  int? sunrise;
-  int? sunset;
+  String? sunrise;
+  String? sunset;
 
   Sys({this.type, this.id, this.country, this.sunrise, this.sunset});
 
   Sys.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
+    type = json['type'].toString();
     id = json['id'];
-    country = json['country'];
-    sunrise = json['sunrise'];
-    sunset = json['sunset'];
+    country = json['country'].toString();
+    sunrise = json['sunrise'].toString();
+    sunset = json['sunset'].toString();
   }
 
   Map<String, dynamic> toJson() {

@@ -12,4 +12,3 @@ class FetchWeatherEvent extends WeatherEvent {
   const FetchWeatherEvent({required this.cityName});
 }
 
-class ResetWeatherEvent extends WeatherEvent {}

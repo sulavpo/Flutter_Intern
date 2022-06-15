@@ -17,4 +17,7 @@ class LoadedWeatherState extends WeatherState {
 
 class LoadingWeatherState extends WeatherState {}
 
-class LoadingFailedWeatherState extends WeatherState {}
+class LoadingFailedWeatherState extends WeatherState {
+  final FailureModel failure;
+  const LoadingFailedWeatherState({required this.failure});
+}
