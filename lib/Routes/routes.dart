@@ -9,11 +9,14 @@ class RouteHandler {
     switch (settings.name) {
       case LoginPage.routeName:
         return MaterialPageRoute(builder: (context) => const LoginPage());
+        //in case to pass value from one page to another page 
+
       case SignUp.routeName:
         return MaterialPageRoute(
             builder: (context) => SignUp(
                   arguments: arguments as ScreenArguments,
                 ));
+                
         case Homepage.routeName:
         return MaterialPageRoute(builder: (context) => const Homepage());
 

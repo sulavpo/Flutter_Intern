@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+//create ScreenArguments class with constructor
+
 class ScreenArguments {
   final String? id;
   final String? email;
   final String? displayName;
 
-  ScreenArguments(this.id,this.email, this.displayName);
+  //constructor
+
+  ScreenArguments(this.id, this.email, this.displayName);
 }
 
 class LoginPage extends StatefulWidget {
@@ -22,21 +26,29 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //declearing variables
+  // globally
   final _formkey = GlobalKey<FormState>();
   bool hidePassword = true;
   final emailText = TextEditingController();
   final passwordText = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[200],
       body: SafeArea(
         child: Form(
+          //when we validate or used text form field we use key= golbally decleared key
+
           key: _formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Welcome!!',style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold),),
+              Text(
+                'Welcome!!',
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+              ),
               Padding(
                 padding: const EdgeInsets.all(28.0),
                 child: TextFormField(
@@ -48,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    filled: true,
+                      filled: true,
                       border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(width: 1, color: Colors.white),
@@ -60,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       focusColor: Colors.white,
-                      labelText: 'Email',fillColor: Colors.white,
+                      labelText: 'Email',
+                      fillColor: Colors.white,
                       suffixIconColor: Colors.white,
                       suffixIcon: const Icon(Icons.mail)),
                 ),
@@ -74,9 +87,9 @@ class _LoginPageState extends State<LoginPage> {
                       ? 'Password should be more than 3 '
                       : null,
                   decoration: InputDecoration(
-                    filled: true,
-                    focusColor: Colors.white,
-                    fillColor: Colors.white,
+                      filled: true,
+                      focusColor: Colors.white,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(width: 1, color: Colors.black),
@@ -103,8 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                 ),
               ),
-              ElevatedButton(onPressed: (){}, child: const Text('LogIn')),
-              
+              ElevatedButton(onPressed: () {}, child: const Text('LogIn')),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: const Text('Or Login\n in With'),
@@ -112,31 +124,43 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
-                   onTap: () async {
-                        final user = await GoogleSignIn().signIn();
-                        if (user == null) return;
-                        GoogleSignInAccount? loggedUser = user;
-                        final GoogleSignInAuthentication
-                            googleSignInAuthentication =
-                            await loggedUser.authentication;
+                    onTap: () async {
+                      //google sign in authentication
 
-                        final AuthCredential authCredential =
-                            GoogleAuthProvider.credential(
-                                accessToken:
-                                    googleSignInAuthentication.accessToken,
-                                idToken: googleSignInAuthentication.idToken);
+                      final user = await GoogleSignIn().signIn();
+                      if (user == null) return;
+                      GoogleSignInAccount? loggedUser = user;
+                      final GoogleSignInAuthentication
+                          googleSignInAuthentication =
+                          await loggedUser.authentication;
 
-                        FirebaseAuth.instance
-                            .signInWithCredential(authCredential);
-                        print(loggedUser.email);
-                        print(loggedUser.displayName);
-                        Navigator.pushNamed(context, SignUp.routeName,
-                            arguments: ScreenArguments(loggedUser.id,
-                                loggedUser.email, loggedUser.displayName!));
-                      },
-                  child: SvgPicture.asset(AppImages.ggl,height: 50,width: 50,)),
+                      final AuthCredential authCredential =
+                          GoogleAuthProvider.credential(
+                              accessToken:
+                                  googleSignInAuthentication.accessToken,
+                              idToken: googleSignInAuthentication.idToken);
+
+                      FirebaseAuth.instance
+                          .signInWithCredential(authCredential);
+                      // print(loggedUser.email);
+                      // print(loggedUser.displayName);
+                      Navigator.pushNamed(context, SignUp.routeName,
+                          arguments: ScreenArguments(loggedUser.id,
+                              loggedUser.email, loggedUser.displayName!));
+                    },
+                    child: SvgPicture.asset(
+                      AppImages.ggl,
+                      height: 50,
+                      width: 50,
+                    )),
               ),
-              ElevatedButton(style:ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),onPressed: (){}, child: Text('Create a new account'))
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green)),
+                  onPressed: () {
+                    
+                  },
+                  child: Text('Create a new account'))
             ],
           ),
         ),

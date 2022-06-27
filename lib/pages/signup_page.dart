@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'dart:typed_data';
+// import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dummy_firebase/constants/image.dart';
 import 'package:dummy_firebase/pages/home_page.dart';
 import 'package:dummy_firebase/pages/login_page.dart';
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
@@ -22,19 +23,30 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
+class ImageModel {
+  bool isFront;
+  String imageUrl;
+  ImageModel({required this.imageUrl, required this.isFront});
+}
+
 class _SignUpState extends State<SignUp> {
-  Future uploadFile() async {
+  Future<List<ImageModel>> uploadFile() async {
     final path1 = '/front/${pickedXfile1!.name}';
     final path2 = '/back/${pickedXfile2!.name}';
-
+    List<ImageModel> images = [];
     // final file1 = File(pickedImage1!.path);
     // final file2 = File(pickedImage2!.path);
 
     final ref1 = FirebaseStorage.instance.ref().child(path1);
-    ref1.putFile(pickedImage1!);
+    await ref1.putFile(pickedImage1!);
+    image1Url = await ref1.getDownloadURL();
 
     final ref2 = FirebaseStorage.instance.ref().child(path2);
-    ref2.putFile(pickedImage2!);
+    await ref2.putFile(pickedImage2!);
+    image2Url = await ref2.getDownloadURL();
+    images.add(ImageModel(imageUrl: image1Url!, isFront: true));
+    images.add(ImageModel(imageUrl: image2Url!, isFront: false));
+    return images;
     // final results = await File(pickedImage1!.path);
   }
 //   Future picker() async{
@@ -62,6 +74,8 @@ class _SignUpState extends State<SignUp> {
 
   SingingCharacter? _character = SingingCharacter.male;
   String? selectedValue;
+  String? image1Url;
+  String? image2Url;
   bool hidePassword = true;
   bool hidePassword1 = true;
   late XFile? pickedXfile1, pickedXfile2;
@@ -90,6 +104,8 @@ class _SignUpState extends State<SignUp> {
     fullname.text = widget.arguments.displayName ?? '';
     super.initState();
   }
+
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -452,7 +468,7 @@ class _SignUpState extends State<SignUp> {
                             children: [
                               InkWell(
                                   onTap: () async {
-                                   pickedXfile2 = 
+                                    pickedXfile2 =
                                         await _pickImage(ImageSource.gallery);
                                     if (pickedXfile2 != null) {
                                       setState(() {
@@ -463,7 +479,7 @@ class _SignUpState extends State<SignUp> {
                                   child: Icon(Icons.photo)),
                               InkWell(
                                   onTap: () async {
-                                    pickedXfile2 = 
+                                    pickedXfile2 =
                                         await _pickImage(ImageSource.camera);
                                     if (pickedXfile2 != null) {
                                       setState(() {
@@ -507,10 +523,35 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_fomkey.currentState!.validate()) {
+                        _fomkey.currentState!.save();
                         if (pickedImage1 != null && pickedImage2 != null) {
-                          uploadFile();
+                          List<ImageModel> images = await uploadFile();
+                          users
+                              .add({
+                                'full_name': fullname.text,
+                                'address': address.text,
+                                'email': emailText.text,
+                                'password': passwordText.text,
+                                'gender': _character.toString().split('.').last,
+                                'dc_type': selectedValue,
+                                'front_image': images[0].imageUrl,
+                                'back_image': images[1].imageUrl,
+
+                                      // or also can be written as 
+                                // 'front_image': images
+                                //     .where((element) => element.isFront)
+                                //     .first
+                                //     .imageUrl,
+                                // 'back_image': images
+                                //     .where((element) => !element.isFront)
+                                //     .first
+                                //     .imageUrl,
+                              })
+                              .then((value) => print("User Added"))
+                              .catchError((error) =>
+                                  print("Failed to add user: $error"));
                           Navigator.pushNamed(context, Homepage.routeName);
                         } else {
                           return showToast();
