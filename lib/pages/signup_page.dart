@@ -5,18 +5,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dummy_firebase/constants/image.dart';
 import 'package:dummy_firebase/pages/home_page.dart';
 import 'package:dummy_firebase/pages/login_page.dart';
+import 'package:dummy_firebase/toasts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
 enum SingingCharacter { male, female, other }
 
 class SignUp extends StatefulWidget {
-  final ScreenArguments arguments;
-  const SignUp({Key? key, required this.arguments}) : super(key: key);
+  const SignUp({Key? key,}) : super(key: key);
   static const routeName = "/SignUp-page";
 
   @override
@@ -60,17 +61,7 @@ class _SignUpState extends State<SignUp> {
 //   await FirebaseStorage.instance.ref('uploads/$fileName').putData(fileBytes!);
 // }
 //   }
-
-  void showToast() {
-    Fluttertoast.showToast(
-        msg: "Please Select the images",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   SingingCharacter? _character = SingingCharacter.male;
   String? selectedValue;
@@ -98,12 +89,7 @@ class _SignUpState extends State<SignUp> {
     return await ImagePicker().pickImage(source: imageSource);
   }
 
-  @override
-  void initState() {
-    emailText.text = widget.arguments.email ?? '';
-    fullname.text = widget.arguments.displayName ?? '';
-    super.initState();
-  }
+  
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
@@ -527,34 +513,54 @@ class _SignUpState extends State<SignUp> {
                       if (_fomkey.currentState!.validate()) {
                         _fomkey.currentState!.save();
                         if (pickedImage1 != null && pickedImage2 != null) {
-                          List<ImageModel> images = await uploadFile();
-                          users
-                              .add({
-                                'full_name': fullname.text,
-                                'address': address.text,
-                                'email': emailText.text,
-                                'password': passwordText.text,
-                                'gender': _character.toString().split('.').last,
-                                'dc_type': selectedValue,
-                                'front_image': images[0].imageUrl,
-                                'back_image': images[1].imageUrl,
+                          try {
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: emailText.text,
+                                    password: passwordText.text)
+                                .then((value) async {
+                              CollectionReference reference = FirebaseFirestore
+                                  .instance
+                                  .collection("users");
+                              String uid = _auth.currentUser!.uid;
+                              reference.doc(uid).set({"uid": uid});
+                              List<ImageModel> images = await uploadFile();
+                              reference
+                                  .doc(uid)
+                                  .set({
+                                    'full_name': fullname.text,
+                                    'address': address.text,
+                                    'email': emailText.text,
+                                    'password': passwordText.text,
+                                    'gender':
+                                        _character.toString().split('.').last,
+                                    'dc_type': selectedValue,
+                                    'front_image': images[0].imageUrl,
+                                    'back_image': images[1].imageUrl,
+                                    'uid': uid
 
-                                      // or also can be written as 
-                                // 'front_image': images
-                                //     .where((element) => element.isFront)
-                                //     .first
-                                //     .imageUrl,
-                                // 'back_image': images
-                                //     .where((element) => !element.isFront)
-                                //     .first
-                                //     .imageUrl,
-                              })
-                              .then((value) => print("User Added"))
-                              .catchError((error) =>
-                                  print("Failed to add user: $error"));
-                          Navigator.pushNamed(context, Homepage.routeName);
+                                    // or also can be written as
+                                    // 'front_image': images
+                                    //     .where((element) => element.isFront)
+                                    //     .first
+                                    //     .imageUrl,
+                                    // 'back_image': images
+                                    //     .where((element) => !element.isFront)
+                                    //     .first
+                                    //     .imageUrl,
+                                  })
+                                  .then((value) => print("User Added"))
+                                  .catchError((error) =>
+                                      print("Failed to add user: $error"));
+                              Navigator.pushNamed(context, Homepage.routeName);
+                            });
+                          } on FirebaseAuthException catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("${e.code}")));
+                          }
                         } else {
-                          return showToast();
+                          return Toasts.showToast(
+                              "Please Select the Image", Colors.red);
                         }
                       }
                     },

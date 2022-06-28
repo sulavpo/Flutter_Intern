@@ -1,3 +1,4 @@
+import 'package:dummy_firebase/pages/google_signin.dart';
 import 'package:dummy_firebase/pages/home_page.dart';
 import 'package:dummy_firebase/pages/login_page.dart';
 import 'package:dummy_firebase/pages/signup_page.dart';
@@ -13,12 +14,13 @@ class RouteHandler {
 
       case SignUp.routeName:
         return MaterialPageRoute(
-            builder: (context) => SignUp(
-                  arguments: arguments as ScreenArguments,
-                ));
+            builder: (context) => SignUp());
                 
         case Homepage.routeName:
-        return MaterialPageRoute(builder: (context) => const Homepage());
+        return MaterialPageRoute(builder: (context) => Homepage());
+         case GogSign.routeName:
+        return MaterialPageRoute(builder: (context) => GogSign(arguments: arguments as ScreenArguments,));
+
 
       default:
         return MaterialPageRoute(builder: (context) => const LoginPage());
