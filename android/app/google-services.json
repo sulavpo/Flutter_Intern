@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "919696456875",
+    "project_id": "paisa-8fb7f",
+    "storage_bucket": "paisa-8fb7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919696456875:android:7b7801dd1e2ce24a8b4bee",
+        "android_client_info": {
+          "package_name": "com.example.mohar_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919696456875-4t78fqc37ss4irssnd5nogrqn0mb4eu9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mohar_app",
+            "certificate_hash": "f042cce63eed7eecf6ad033a9f95ee22f4fb1678"
+          }
+        },
+        {
+          "client_id": "919696456875-fi339no54hoh1scmnmjpucmv3kom9dft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo1RX_iqnbKfIoXwuYfA0x2VCATKGEx3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919696456875-fi339no54hoh1scmnmjpucmv3kom9dft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
