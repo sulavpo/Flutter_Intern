@@ -17,7 +17,7 @@ class RouteHandler {
         case LandingScreen.routeName:
         return MaterialPageRoute(builder: (context) => const LandingScreen());
         case LandingScrn.routeName:
-        return MaterialPageRoute(builder: (context) => const LandingScrn());
+        return MaterialPageRoute(builder: (context) =>  LandingScrn());
 
       default:
         return MaterialPageRoute(builder: (context) => const HomePage());

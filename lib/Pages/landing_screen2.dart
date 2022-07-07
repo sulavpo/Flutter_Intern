@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_part/Pages/row.dart';
 import 'package:firebase_part/Pages/signup_page.dart';
 // import 'package:firebase_part/dialouge/dialouge.dart';
@@ -11,7 +12,7 @@ import 'package:http/http.dart' as http;
 // final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 class LandingScrn extends StatefulWidget {
-  const LandingScrn({Key? key}) : super(key: key);
+  LandingScrn({Key? key}) : super(key: key);
   static const routeName = "/Landing-scrn";
 
   @override
@@ -29,18 +30,18 @@ class _LandingScrnState extends State<LandingScrn> {
     return response.body;
   }
 
-  List<Data> charData = [];
-  Future loadSaleData() async {
-    String jsonString = await getJsonFromFirebaseAPI();
-    final jsonResponse = json.decode(jsonString);
-    setState(() {
-      for (var i in jsonResponse) {
-        if (i != null) {
-          charData.add(Data.fromJson(i));
-        }
-      }
-    });
-  }
+  //List<Data> charData = [];
+  // Future loadSaleData() async {
+  //   String jsonString = await getJsonFromFirebaseAPI();
+  //   final jsonResponse = json.decode(jsonString);
+  //   setState(() {
+  //     for (var i in jsonResponse) {
+  //       if (i != null) {
+  //         charData.add(Data.fromJson(i));
+  //       }
+  //     }
+  //   });
+  // }
 
   // Future<List<Data>> retrieveUsers() async {
   //   QuerySnapshot<Map<String, dynamic>> snapshot =
@@ -53,7 +54,7 @@ class _LandingScrnState extends State<LandingScrn> {
 
   @override
   void didChangeDependencies() async {
-    await loadSaleData();
+    // await loadSaleData();
 
     setState(() {
       hasData = true;
@@ -93,56 +94,77 @@ class _LandingScrnState extends State<LandingScrn> {
                       child: const Text("Logout")),
                   ElevatedButton(
                       onPressed: () async {
-                        charData = [];
-                        print(await loadSaleData());
-                        setState(() {
-                          showData = true;
-                        });
+                        // charData = [];
+                        // print(await loadSaleData());
+                        // setState(() {
+                        //   showData = true;
+                        // });
                       },
                       child: const Text("Press Me")),
-                  Visibility(
-                      visible: showData,
-                      child: !hasData
-                          ? const SizedBox()
-                          : SizedBox(
-                              height: 200,
-                              child: StreamBuilder<Object>(
-                                stream: null,
-                                builder: (context, snapshot) {
-                                  return ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      itemCount: charData.length,
-                                      itemBuilder: (context, index) {
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            CustomRow().customRow(
-                                                data: charData[index].fullname,label: 'Name:\t',context: context,type:'name'),
-                                            CustomRow().customRow(
-                                                data: charData[index].mother,label: 'Mother Name:\t',context: context,type:'mother'),
-                                            CustomRow().customRow(
-                                                data: charData[index].father,label: 'Father Name:\t',context: context,type:'father'),
-                                            CustomRow().customRow(
-                                                data: charData[index].password,label: 'Password:\t',context: context,type:'password'),
-                                            CustomRow().customRow(
-                                                data: charData[index].phone,label: 'Phone:\t',context: context,type:'phone'),
-                                            CustomRow().customAddress(
-                                                city: charData[index].address.city,context: context,type:'address',
-                                                district: charData[index]
-                                                    .address
-                                                    .district,
-                                                provision: charData[index]
-                                                    .address
-                                                    .provision)
-                                          ],
-                                        );
-                                      });
-                                }
-                              ),
-                            )
-                 
-                      ),
+                  SizedBox(
+                      height: 200,
+                      child: StreamBuilder(
+                          stream:
+                              FirebaseDatabase.instance.ref("users/1").onValue,
+                          //initialData: 0,
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<DatabaseEvent> snapshot,
+                          ) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Text('waiting');
+                            } else if (snapshot.connectionState ==
+                                    ConnectionState.active ||
+                                snapshot.connectionState ==
+                                    ConnectionState.done) {
+                              if (snapshot.hasData) {
+                                Data recievedData =
+                                    Data.fromDatabaseEvent(snapshot.data!);
+                                return SizedBox(
+                                  height: 1000,
+                                  child: ListView(
+                                    children: [
+                                      CustomRow().customRow(
+                                          data: recievedData.fullname,
+                                          label: 'Name:\t',
+                                          context: context,
+                                          type: 'name'),
+                                      CustomRow().customRow(
+                                          data: recievedData.mother,
+                                          label: 'Mother Name:\t',
+                                          context: context,
+                                          type: 'mother'),
+                                      CustomRow().customRow(
+                                          data: recievedData.father,
+                                          label: 'Father Name:\t',
+                                          context: context,
+                                          type: 'father'),
+                                      CustomRow().customRow(
+                                          data: recievedData.password,
+                                          label: 'Password:\t',
+                                          context: context,
+                                          type: 'password'),
+                                      CustomRow().customRow(
+                                          data: recievedData.phone,
+                                          label: 'Phone:\t',
+                                          context: context,
+                                          type: 'phone'),
+                                      CustomRow().customAddress(
+                                          city: recievedData.address.city,
+                                          context: context,
+                                          type: 'address',
+                                          district:
+                                              recievedData.address.district,
+                                          provision:
+                                              recievedData.address.provision)
+                                    ],
+                                  ),
+                                );
+                              }
+                            }
+                            return Text('Kina bigriyo malai ni thaha chaina');
+                          }))
                 ],
               ),
             ),

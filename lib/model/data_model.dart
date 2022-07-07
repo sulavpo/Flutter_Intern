@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_part/model/address_model.dart';
 
 class Data {
@@ -29,7 +30,6 @@ class Data {
       parsedJson['mother'].toString(),
       parsedJson['father'].toString(),
       parsedJson['password'].toString(),
-
     );
   }
 
@@ -40,4 +40,13 @@ class Data {
         mother = doc.data()!["mother"],
         father = doc.data()!["father"],
         password = doc.data()!["password"];
+
+  Data.fromDatabaseEvent(DatabaseEvent db)
+      : fullname = db.snapshot.child('name').value.toString(),
+        address =
+            FullAddress.fromDatabaseSnapshot(db.snapshot.child('address')),
+        phone = db.snapshot.child('phone').value.toString(),
+        mother = db.snapshot.child('mother').value.toString(),
+        father = db.snapshot.child('father').value.toString(),
+        password = db.snapshot.child('password').value.toString();
 }

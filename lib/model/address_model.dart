@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart';
+
 class FullAddress {
   final String city;
   final String district;
@@ -16,4 +18,9 @@ class FullAddress {
       : city = addressMap["city"],
         district = addressMap["district"],
         provision = addressMap["provision"];
+
+  FullAddress.fromDatabaseSnapshot(DataSnapshot dbsn)
+      : city = dbsn.child('city').value.toString(),
+        district = dbsn.child('district').value.toString(),
+        provision = dbsn.child('provision').value.toString();
 }
